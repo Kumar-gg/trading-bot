@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      TB_DATABASE_URL: sqlite+aiosqlite:///./data/trading_bot.db
+    env_file:
+      - path: backend/.env
+        required: false
+    volumes:
+      - trading-bot-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  trading-bot-data:
